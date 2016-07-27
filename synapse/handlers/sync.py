@@ -993,8 +993,8 @@ class SyncHandler(object):
 
         ephemeral = sync_config.filter_collection.filter_room_ephemeral(ephemeral)
 
-        if not (always_include or batch or account_data or ephemeral or full_state):
-            return
+        #if not (always_include or batch or account_data or ephemeral or full_state):
+        #    return
 
         state = yield self.compute_state_delta(
             room_id, batch, sync_config, since_token, now_token,
@@ -1012,6 +1012,7 @@ class SyncHandler(object):
                 unread_notifications=unread_notifications,
             )
 
+            always_include = True
             if room_sync or always_include:
                 notifs = yield self.unread_notifs_for_room_id(
                     room_id, sync_config
